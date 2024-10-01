@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const CountriesList = () => {
   const [countries, setCountries] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch data from API
-    fetch("https://xcountries-backend.azurewebsites.net/all")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setCountries(data);
-      })
-      .catch((err) => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get('https://xcountries-backend.azurewebsites.net/all');
+        setCountries(response.data);
+      } catch (err) {
         console.error("Error fetching data: ", err);
         setError(err.message);
-      });
+      }
+    };
+
+    fetchCountries();
   }, []);
 
   // If there's an error, display the error message
