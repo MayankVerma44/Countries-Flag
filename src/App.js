@@ -6,7 +6,7 @@ import CountriesList from "./countriesList";
 function App() {
   return (
     <div className="App">
-      <h1>Country Flags</h1>
+      {/* <h1>Country Flags</h1> */}
       <CountriesList />
     </div>
   );
